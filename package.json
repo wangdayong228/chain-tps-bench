@@ -1,0 +1,24 @@
+{
+  "name": "bulk-sender-ts",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deposit": "npx ts-node deposit.ts",
+    "bulksend": "npx ts-node bulksend.ts",
+    "tps": "npx ts-node tps.ts",
+    "start": "bash -c 'for i in {0..10}; do npx ts-node bulksend.ts $((i)) 1000 > ./log/$((i)).log & sleep 1; done; wait'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "ethers": "^6.13.5"
+  }
+}
