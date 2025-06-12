@@ -33,3 +33,18 @@ npm run start
 npm run tps
 ```
 
+## 需要注意的问题
+
+### 交易池和并发量
+并发量应不高于交易池容量上限，否则会导致丢交易。当前设置每个用户每 15笔交易被打包后，再发送下一批。
+如下设置 globalslots 为 50000，表示 pending 的交易数最多可容纳 50000。 则当并发账户数为 3000 时，每个用户一个批次交易不要超过 50000/3000=16。
+
+txpool 相关参数。pending 指 nonce 连续的交易，queue 指 nonce 不连续的或即使连续但还没有变成 pending 状态的。
+```
+--txpool.accountqueue=160
+--txpool.accountslots=160
+--txpool.globalqueue=50000
+--txpool.globalslots=50000
+```
+
+查看 txpool 状态的 rpc 有 `txpool_status`，`txpool_content`，`txpool_inspect`。需要运行节点时开启 txpool module。
