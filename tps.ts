@@ -15,7 +15,14 @@ async function monitorTPS() {
         // console.log(`Get block ${blockNum}`)
         const block = await provider.getBlock(blockNum);
         if (block) {
-            blockCaches.push({ time: block.timestamp, block: blockNum, txNum: block.transactions.length });
+            const newBlock = { time: block.timestamp, block: blockNum, txNum: block.transactions.length };
+            console.log("new block", newBlock);
+            if (newBlock.txNum > 1) {
+                console.log("hash", block.hash);
+                console.log("first 5 transactions", block.transactions.slice(0, 5))
+            }
+            blockCaches.push(newBlock);
+
             if (blockCaches.length > blockCnt) {
                 blockCaches.shift(); // 移除最旧的时间戳
             }
@@ -28,7 +35,7 @@ async function monitorTPS() {
                 console.log(`Block ${blockCaches[1].block} ~ ${blockNum}, TxNum: ${allTxNum}, TPS: ${tps}`);
             }
             blockNum++;
-        }        
+        }
         await sleep(50);
     }
 }

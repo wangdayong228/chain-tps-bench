@@ -7,7 +7,7 @@
     "deposit": "npx ts-node deposit.ts ",
     "bulksend": "npx ts-node bulksend.ts 0 500",
     "tps": "npx ts-node tps.ts",
-    "start": "mkdir -p logs && bash -c 'for i in {0..5}; do npx ts-node bulksend.ts $((i)) 3340000 > ./logs/$((i)).log & sleep 1; done; wait'"
+    "start": "mkdir -p logs && bash -c 'for i in {0..0}; do npx ts-node bulksend.ts $((i)) 20000000 > ./logs/$((i)).log & sleep 1; done; wait'"
   },
   "keywords": [],
   "author": "",
